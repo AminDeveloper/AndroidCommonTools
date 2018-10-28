@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="app_name">63167</string>
+    <string name="no_internet">اتصال به شبکه اینترنت برقرار نیست !</string>
+    <string name="unknown_error">بروز خطا</string>
+    <string name="men">مرد</string>
+    <string name="woman">زن</string>
+    <string name="gender">جنسیت</string>
+    <string name="telephon">تلفن ثابت</string>
+
+
+</resources>

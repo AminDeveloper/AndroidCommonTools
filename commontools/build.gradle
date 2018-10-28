@@ -1,0 +1,70 @@
+buildscript {
+    repositories {
+        mavenCentral()
+    }
+
+    dependencies {
+        classpath 'com.github.dcendents:android-maven-gradle-plugin:2.0'
+    }
+}
+apply plugin: 'com.github.dcendents.android-maven'
+apply plugin: 'com.android.library'
+apply plugin: 'kotlin-android'
+group 'com.paraxco'
+
+version '0.4.6'
+
+android {
+    compileSdkVersion 27
+    buildToolsVersion '28.0.3'
+
+    defaultConfig {
+        minSdkVersion 16
+        targetSdkVersion 27
+        versionCode 32
+        versionName "0.4.6"
+
+        testInstrumentationRunner "android.support.test.runner.AndroidJUnitRunner"
+
+    }
+
+    buildTypes {
+        release {
+            minifyEnabled false
+            proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
+        }
+    }
+
+}
+
+dependencies {
+    implementation fileTree(dir: 'libs', include: ['*.jar'])
+
+    implementation 'com.android.support:appcompat-v7:27.1.1'
+//    testImplementation 'junit:junit:4.12'
+//    androidTestImplementation 'com.android.support.test:runner:1.0.1'
+//    androidTestImplementation 'com.android.support.test.espresso:espresso-core:3.0.1'
+
+    implementation 'org.jetbrains.anko:anko-common:0.9'
+    implementation "org.jetbrains.kotlin:kotlin-stdlib-jdk7:$kotlin_version"
+
+//    compile 'com.android.support:design:26.1.0'
+
+    implementation 'com.androidadvance:topsnackbar:1.1.1'
+
+
+//    compile 'com.onesignal:OneSignal:3.+@aar'
+
+//    compile project(':persiandatepicker')
+
+    implementation "me.leolin:ShortcutBadger:1.1.19@aar"
+
+    //Android architecture components
+    def lifecycle_version = "1.1.0"
+    implementation "android.arch.lifecycle:extensions:$lifecycle_version"
+
+
+}
+repositories {
+    mavenCentral()
+}
