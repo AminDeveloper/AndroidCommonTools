@@ -4,13 +4,16 @@ buildscript {
     }
 
     dependencies {
-        classpath 'com.github.dcendents:android-maven-gradle-plugin:2.0'
+        classpath 'com.github.dcendents:android-maven-gradle-plugin:2.1'
     }
 }
 apply plugin: 'com.github.dcendents.android-maven'
+
 apply plugin: 'com.android.library'
 apply plugin: 'kotlin-android'
 group 'com.paraxco'
+group='com.github.AminDeveloper'
+
 
 version '0.4.6'
 
