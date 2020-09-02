@@ -43,18 +43,23 @@ public class NetworkObserverHandler extends StatefullObserverHandler<NetworkObse
         super.addObserver(observer);
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.N) {
             if (getObserversCount() == 1)//for the first time
-                observer.getContextForNetworkObserver().registerReceiver(networkChangeReceiver,
-                        new IntentFilter(ConnectivityManager.CONNECTIVITY_ACTION));
+                try {
+                    observer.getContextForNetworkObserver().registerReceiver(networkChangeReceiver,
+                            new IntentFilter(ConnectivityManager.CONNECTIVITY_ACTION));
+                } catch (Exception e) {
+                    e.printStackTrace();
+                }
+
         }
         informObservers(Utils.isNetworkAvailable(observer.getContextForNetworkObserver()));
     }
 
     @Override
     public void removeObserver(NetworkChangeObserver observer) {
-        int lastCont=getObserversCount();
+        int lastCont = getObserversCount();
         super.removeObserver(observer);
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.N) {
-            if (getObserversCount() == 0 && lastCont==1)//for the last time
+            if (getObserversCount() == 0 && lastCont == 1)//for the last time
                 try {
                     observer.getContextForNetworkObserver().unregisterReceiver(networkChangeReceiver);
                 } catch (IllegalArgumentException e) {

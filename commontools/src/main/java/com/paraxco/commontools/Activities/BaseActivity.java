@@ -131,14 +131,14 @@ public abstract class BaseActivity extends AppCompatActivity implements NetworkO
     /**
      * dismiss network error message
      */
-    private void dismissNetworkDialog() {
+    protected void dismissNetworkDialog() {
 
     }
 
     /**
      * shows network error message
      */
-    private void showNetworkDialog() {
+    protected void showNetworkDialog() {
 
 
     }
