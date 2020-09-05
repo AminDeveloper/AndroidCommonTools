@@ -6,6 +6,7 @@ import android.widget.Toast
 import com.paraxco.basictools.Commontools.Observers.ObserverList
 import com.paraxco.basictools.Commontools.Observers.TestObserver
 import com.paraxco.commontools.Activities.BaseActivity
+import com.paraxco.commontools.BroadCastReceiver.NetworkChangeReceiver
 import com.paraxco.commontools.Observers.RetryHelper
 import com.paraxco.commontools.Utils.RetryHelper.DefaultNetworkErrorDialog
 import com.paraxco.commontools.Utils.SmartLogger
@@ -23,8 +24,8 @@ class MainActivity : BaseActivity(), TestObserver.ObserverTest {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
+        NetworkChangeReceiver.PingBeforeInform=true
         DefaultNetworkErrorDialog.startShowingDefaultNetworkErrorDialog(this)
-
         SmartLogger.initLogger(applicationContext)
         setContentView(R.layout.main_activity)
 

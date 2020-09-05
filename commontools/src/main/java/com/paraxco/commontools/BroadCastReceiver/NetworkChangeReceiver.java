@@ -6,6 +6,7 @@ import android.content.Intent;
 import android.content.IntentFilter;
 import android.net.ConnectivityManager;
 import android.os.Build;
+import android.os.Handler;
 
 import com.paraxco.commontools.Observers.NetworkObserverHandler;
 import com.paraxco.commontools.Observers.NetworkStateLiveData;
@@ -18,18 +19,57 @@ import java.util.concurrent.atomic.AtomicBoolean;
  */
 
 public class NetworkChangeReceiver extends BroadcastReceiver {
+    public static boolean PingBeforeInform = false;
+    public static String pingHost = "www.google.com";
+    public static int pingTimeOut = 500;
+
     AtomicBoolean isRegistered = new AtomicBoolean(false);
+    private Boolean lastState = null;
+    private Thread pingThread;
 
     @Override
     public void onReceive(Context context, Intent intent) {
         if (intent.getExtras() != null) {
-            Boolean currentState = Utils.isNetworkAvailable(context);
+            boolean currentState = Utils.isNetworkAvailable(context);
             //to prevent multiple call from device
-            if (NetworkObserverHandler.getInstance().getData() != currentState)
-                informObservers(currentState);
-
+            if (lastState == null || lastState != currentState) {
+                lastState = currentState;
+                changeState(currentState);
+            }
 
         }
+    }
+
+    private void changeState(Boolean currentState) {
+        if (!currentState || !PingBeforeInform)
+            informObservers(currentState);
+        else
+            checkNetworkStateByPing();
+    }
+
+    private void checkNetworkStateByPing() {
+
+        final Handler handler = new Handler();
+        if (pingThread != null)
+            pingThread.stop();
+
+        pingThread = new Thread(new Runnable() {
+            @Override
+            public void run() {
+                final boolean isReachable = Utils.isConnectedToThisServer(pingHost, pingTimeOut);
+
+                handler.post(new Runnable() {
+                    @Override
+                    public void run() {
+                        if (isReachable)
+                            informObservers(true);
+                        else
+                            informObservers(false);
+                    }
+                });
+            }
+        });
+        pingThread.start();
     }
 
     private void informObservers(Boolean currentState) {
@@ -67,4 +107,8 @@ public class NetworkChangeReceiver extends BroadcastReceiver {
             }
     }
 
+    public void refreshCurrentState(Context context) {
+        Boolean currentState = Utils.isNetworkAvailable(context);
+        changeState(currentState);
+    }
 }

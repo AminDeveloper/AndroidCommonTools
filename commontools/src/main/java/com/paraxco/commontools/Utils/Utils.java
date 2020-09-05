@@ -51,6 +51,8 @@ import com.paraxco.commontools.R;
 import com.paraxco.commontools.Utils.Permision.PermisionUtils;
 
 import java.io.File;
+import java.io.IOException;
+import java.net.InetAddress;
 import java.util.Locale;
 
 
@@ -230,31 +232,29 @@ public class Utils {
         return activeNetworkInfo != null && activeNetworkInfo.isConnected();
     }
 
+    public static boolean isConnectedToThisServer(String host,int timeout) {
 
-//    public static void createNotification(Context context, Class<?> cls, String title, EventCommonData eventCommonData) {
-//        // Prepare intent which is triggered if the
-//        // notification is selected
-//        String text = eventCommonData.getMessage();
+        try {
+            return InetAddress.getByName(host).isReachable(timeout);
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+
+
+//        Runtime runtime = Runtime.getRuntime();
+//        try {
 //
-//        Intent intent = new Intent(context, cls);
-//        intent.putExtra(NOTIFICATION_COMMON_DATA, eventCommonData);
-//        intent.addFlags(Intent.FLAG_ACTIVITY_SINGLE_TOP);
-//        PendingIntent pIntent = PendingIntent.getActivity(context, (int) System.currentTimeMillis(), intent, 0);
-//
-//        // Build notification
-//        // Actions are just fake
-//        Notification noti = new Notification.Builder(context)
-//                .setContentTitle(title)
-//                .setContentText(text).setSmallIcon(R.drawable.logo)
-//                .setContentIntent(pIntent)
-//                .build();
-//        NotificationManager notificationManager = (NotificationManager) context.getSystemService(NOTIFICATION_SERVICE);
-//        // hide the notification after its selected
-//        noti.flags |= Notification.FLAG_AUTO_CANCEL;
-//
-//        notificationManager.notify(notificationID.incrementAndGet(), noti);
-//
-//    }
+//            Process ipProcess = runtime.exec("/system/bin/ping -c 1 " + host);
+//            int exitValue = ipProcess.waitFor();
+//            return (exitValue == 0);
+//        } catch (IOException e) {
+//            e.printStackTrace();
+//        } catch (InterruptedException e) {
+//            e.printStackTrace();
+//        }
+        return false;
+    }
+
 
     public static Point getDisplayDimention(Activity activity) {
         Display display = activity.getWindowManager().getDefaultDisplay();
@@ -262,6 +262,7 @@ public class Utils {
         display.getSize(size);
         return size;
     }
+
     public static Point getDisplayDimention(Context context) {
         DisplayMetrics metrics = context.getResources().getDisplayMetrics();
         int width = metrics.widthPixels;
@@ -386,8 +387,9 @@ public class Utils {
         drawable.draw(canvas);
         return bitmap;
     }
-    public static void createNotification(Context context, Class<?> cls,int iconRes, String title, String text, String type) {
-       NotificationHelper.createNotification(context,cls,iconRes,title,text,type);
+
+    public static void createNotification(Context context, Class<?> cls, int iconRes, String title, String text, String type) {
+        NotificationHelper.createNotification(context, cls, iconRes, title, text, type);
 
     }
 

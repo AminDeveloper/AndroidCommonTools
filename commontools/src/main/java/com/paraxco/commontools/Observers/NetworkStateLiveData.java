@@ -7,7 +7,6 @@ import android.content.Context;
 import android.support.annotation.NonNull;
 
 import com.paraxco.commontools.BroadCastReceiver.NetworkChangeReceiver;
-import com.paraxco.commontools.Utils.Utils;
 
 public class NetworkStateLiveData extends MutableLiveData<NetworkStateLiveData.NetworkState> {
 
@@ -38,13 +37,12 @@ public class NetworkStateLiveData extends MutableLiveData<NetworkStateLiveData.N
     public void registerService(Context context) {
         networkChangeReceiver.registerService(context);
         //inform initial value
-        postValue(new NetworkStateLiveData.NetworkState( Utils.isNetworkAvailable(context)));
+       networkChangeReceiver.refreshCurrentState(context);
 
     }
 
     public void unRegisterService(Context context) {
         networkChangeReceiver.unRegisterService(context);
-
     }
 
 
