@@ -36,7 +36,7 @@ class RetryHelper(val context: Context, var numOfFinished: Int = 1) : NetworkObs
         }
 
         fun getInstanceAndCall(fragment: Fragment, call: () -> Any?, numOfFinished: Int = 1): RetryHelper {
-            return getInstanceAndCall(fragment.context!!, fragment as LifecycleOwner , call, numOfFinished)
+            return getInstanceAndCall(fragment.context!!, fragment as LifecycleOwner, call, numOfFinished)
         }
 
         fun getInstanceAndCall(context: Context, owner: LifecycleOwner?, call: () -> Any?, numOfFinished: Int = 1): RetryHelper {
@@ -64,7 +64,7 @@ class RetryHelper(val context: Context, var numOfFinished: Int = 1) : NetworkObs
             inNoDialogSection = true
 
             if (dialog != null && dialog!!.isShowing) {
-                dismisLoading()
+                dismisDialog()
                 wasShowing = true
             } else
                 wasShowing = false
@@ -88,7 +88,7 @@ class RetryHelper(val context: Context, var numOfFinished: Int = 1) : NetworkObs
 
         }
 
-        fun dismisLoading() {
+        fun dismisDialog() {
 
             if (dialog != null && dialog!!.isShowing)
                 try {
@@ -97,6 +97,10 @@ class RetryHelper(val context: Context, var numOfFinished: Int = 1) : NetworkObs
                     e.printStackTrace()
                 }
         }
+        fun unLockDismissedDialog() {
+            dismissed=false
+        }
+
 
         fun showDialog(context: Context) {
             if (inNoDialogSection) {
@@ -113,7 +117,10 @@ class RetryHelper(val context: Context, var numOfFinished: Int = 1) : NetworkObs
                 dialog?.window?.setLayout(WindowManager.LayoutParams.MATCH_PARENT,
                         WindowManager.LayoutParams.MATCH_PARENT)
                 dialog?.findViewById<View>(R.id.layMain)?.setOnClickListener {
-                    dismisLoading()
+                    dismisDialog()
+                }
+                dialog?.findViewById<View>(R.id.btnClose)?.setOnClickListener {
+                    dismisDialog()
                 }
                 dialog?.setOnDismissListener {
                     if (!inNoDialogSection)
@@ -137,6 +144,7 @@ class RetryHelper(val context: Context, var numOfFinished: Int = 1) : NetworkObs
     var delaySecond: Long = 8
     var call: (() -> Any?)? = null
     private var liveData: RetryHelperLive? = null
+
     /**
      * if owner is passed no need to explicit call for lifecycle like pause resume and disable
      */
@@ -199,7 +207,7 @@ class RetryHelper(val context: Context, var numOfFinished: Int = 1) : NetworkObs
                 if (!enabled)
                     return@postDelayed
                 calling.set(false)
-               invokeMethod()
+                invokeMethod()
 
                 SmartLogger.logDebug("invoked")
 
@@ -217,7 +225,7 @@ class RetryHelper(val context: Context, var numOfFinished: Int = 1) : NetworkObs
         numOfFinished -= 1
         if (numOfFinished == 0) {
             disable()
-            dismisLoading()
+            dismisDialog()
         }
     }
 
@@ -227,7 +235,7 @@ class RetryHelper(val context: Context, var numOfFinished: Int = 1) : NetworkObs
     }
 
     override fun onNetworkStateChange(connected: Boolean) {
-        dismissed = false
+        unLockDismissedDialog();
         if (connected)
             retry(false)
     }

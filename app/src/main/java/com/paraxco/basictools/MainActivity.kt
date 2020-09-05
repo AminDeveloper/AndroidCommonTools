@@ -7,6 +7,7 @@ import com.paraxco.basictools.Commontools.Observers.ObserverList
 import com.paraxco.basictools.Commontools.Observers.TestObserver
 import com.paraxco.commontools.Activities.BaseActivity
 import com.paraxco.commontools.Observers.RetryHelper
+import com.paraxco.commontools.Utils.RetryHelper.DefaultNetworkErrorDialog
 import com.paraxco.commontools.Utils.SmartLogger
 import kotlinx.android.synthetic.main.main_activity.*
 import org.jetbrains.anko.doAsync
@@ -22,6 +23,7 @@ class MainActivity : BaseActivity(), TestObserver.ObserverTest {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
+        DefaultNetworkErrorDialog.startShowingDefaultNetworkErrorDialog(this,this)
 
         SmartLogger.initLogger(applicationContext)
         setContentView(R.layout.main_activity)
@@ -58,6 +60,8 @@ class MainActivity : BaseActivity(), TestObserver.ObserverTest {
     override fun onDestroy() {
         super.onDestroy()
 //        ObserverList.getTestObserver().removeObserver(this)
+        DefaultNetworkErrorDialog.stopShowingDefaultNetworkErrorDialog(this)
+
 
     }
 
