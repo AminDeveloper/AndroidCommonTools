@@ -17,9 +17,13 @@ object DefaultNetworkErrorDialog {
     }
 
     fun startShowingDefaultNetworkErrorDialog(context: Context?) {
-        NetworkStateLiveData.getInstance().registerService(context)
-        NetworkStateLiveData.getInstance().observeForever {
-            handleNetworkEvent(it, context)
+        if(context is LifecycleOwner)
+            startShowingDefaultNetworkErrorDialog(context,context as LifecycleOwner)
+        else {
+            NetworkStateLiveData.getInstance().registerService(context)
+            NetworkStateLiveData.getInstance().observeForever {
+                handleNetworkEvent(it, context)
+            }
         }
     }
 

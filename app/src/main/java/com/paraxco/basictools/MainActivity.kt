@@ -23,7 +23,7 @@ class MainActivity : BaseActivity(), TestObserver.ObserverTest {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        DefaultNetworkErrorDialog.startShowingDefaultNetworkErrorDialog(this,this)
+        DefaultNetworkErrorDialog.startShowingDefaultNetworkErrorDialog(this)
 
         SmartLogger.initLogger(applicationContext)
         setContentView(R.layout.main_activity)
