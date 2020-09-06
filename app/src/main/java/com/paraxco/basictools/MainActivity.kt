@@ -1,5 +1,6 @@
 package com.paraxco.basictools
 
+import android.app.Activity
 import android.content.Intent
 import android.os.Bundle
 import android.widget.Toast
@@ -10,6 +11,7 @@ import com.paraxco.commontools.BroadCastReceiver.NetworkChangeReceiver
 import com.paraxco.commontools.Observers.RetryHelper
 import com.paraxco.commontools.Utils.RetryHelper.DefaultNetworkErrorDialog
 import com.paraxco.commontools.Utils.SmartLogger
+import com.paraxco.commontools.Utils.Utils
 import kotlinx.android.synthetic.main.main_activity.*
 import org.jetbrains.anko.doAsync
 import org.jetbrains.anko.uiThread
@@ -19,12 +21,14 @@ import org.jetbrains.anko.uiThread
  *
  */
 
-class MainActivity : BaseActivity(), TestObserver.ObserverTest {
+class MainActivity : Activity(), TestObserver.ObserverTest {
     var retryHelper: RetryHelper? = null
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        NetworkChangeReceiver.PingBeforeInform=true
+        NetworkChangeReceiver.PingBeforeInform = true
+        NetworkChangeReceiver.pingMechanism = { host, timeout -> true }
+
         DefaultNetworkErrorDialog.startShowingDefaultNetworkErrorDialog(this)
         SmartLogger.initLogger(applicationContext)
         setContentView(R.layout.main_activity)
@@ -69,7 +73,6 @@ class MainActivity : BaseActivity(), TestObserver.ObserverTest {
     override fun observeChanges(list: MutableList<String>?) {
         Toast.makeText(this, list!!.size.toString(), Toast.LENGTH_LONG).show()
     }
-
 
 
     private fun startNotificationBadgeTest() {
