@@ -84,21 +84,21 @@ class LazyLoaderHelper {
     }
 
     private fun checkBottomScrollState(): Boolean {
-        SmartLogger.logDebug("scroll" + (recyclerView!!.computeVerticalScrollRange() -
-                recyclerView!!.computeVerticalScrollOffset()
-                ).toString())
+//        SmartLogger.logDebug("scroll" + (recyclerView!!.computeVerticalScrollRange() -
+//                recyclerView!!.computeVerticalScrollOffset()
+//                ).toString())
+////
+////        SmartLogger.logDebug("scroll range:" + (recyclerView!!.computeVerticalScrollRange()).toString())
+////
+////        SmartLogger.logDebug("scroll offset:" + (recyclerView!!.computeVerticalScrollOffset()).toString())
+////
+////        SmartLogger.logDebug("scroll Extent:" + (recyclerView!!.computeVerticalScrollExtent()).toString())
 //
-//        SmartLogger.logDebug("scroll range:" + (recyclerView!!.computeVerticalScrollRange()).toString())
+//        SmartLogger.logDebug("hello " + (recyclerView!!.computeVerticalScrollRange() != 0 &&
+//                (recyclerView!!.computeVerticalScrollRange() -
+//                        recyclerView!!.computeVerticalScrollOffset() -
 //
-//        SmartLogger.logDebug("scroll offset:" + (recyclerView!!.computeVerticalScrollOffset()).toString())
-//
-//        SmartLogger.logDebug("scroll Extent:" + (recyclerView!!.computeVerticalScrollExtent()).toString())
-
-        SmartLogger.logDebug("hello " + (recyclerView!!.computeVerticalScrollRange() != 0 &&
-                (recyclerView!!.computeVerticalScrollRange() -
-                        recyclerView!!.computeVerticalScrollOffset() -
-
-                        recyclerView!!.computeVerticalScrollExtent() <= 300)).toString())
+//                        recyclerView!!.computeVerticalScrollExtent() <= 300)).toString())
 
         return recyclerView!!.computeVerticalScrollRange() != 0 &&
                 (recyclerView!!.computeVerticalScrollRange() -

@@ -78,8 +78,8 @@ class RetryHelper(val context: Context, var numOfFinished: Int = 1) : NetworkObs
         fun endNoDialogSection(context: Context) {
             inNoDialogSection = false
 //            SmartLogger.logDebug(wasDismissed.toString())
-            SmartLogger.logDebug((dialog != null).toString())
-            SmartLogger.logDebug(wasShowing.toString())
+//            SmartLogger.logDebug((dialog != null).toString())
+//            SmartLogger.logDebug(wasShowing.toString())
 
             if (wasShowing) {
                 showDialog(context)
@@ -200,7 +200,7 @@ class RetryHelper(val context: Context, var numOfFinished: Int = 1) : NetworkObs
         showDialog(context)
 
 
-        SmartLogger.logDebug("retry")
+//        SmartLogger.logDebug("retry")
         if (Utils.isNetworkAvailable(context)) {
             NetworkObserverHandler.getInstance().removeObserver(this)
             Handler().postDelayed({
@@ -209,7 +209,7 @@ class RetryHelper(val context: Context, var numOfFinished: Int = 1) : NetworkObs
                 calling.set(false)
                 invokeMethod()
 
-                SmartLogger.logDebug("invoked")
+//                SmartLogger.logDebug("invoked")
 
             }, if (whithDelay) delaySecond * 1000 else 0)
         } else {

@@ -11,6 +11,9 @@ import com.paraxco.commontools.Observers.NetworkObserverHandler
 import com.paraxco.commontools.Observers.NetworkStateLiveData
 import com.paraxco.commontools.Observers.NetworkStateLiveData.NetworkState
 import com.paraxco.commontools.Utils.Utils
+import java.util.concurrent.ExecutorService
+import java.util.concurrent.Executors
+import java.util.concurrent.Future
 import java.util.concurrent.atomic.AtomicBoolean
 
 /**
@@ -21,12 +24,13 @@ class NetworkChangeReceiver : BroadcastReceiver() {
         var PingBeforeInform = false
         var pingHost = "www.google.com"
         var pingTimeOut = 1000
-        var pingMechanism:((host:String,timeout:Int)->Boolean)?=null
+        var pingMechanism: ((host: String, timeout: Int) -> Boolean)? = null
     }
 
+    private var future: Future<*>?=null
+    private var threadExecutor: ExecutorService? = null
     var isRegistered = AtomicBoolean(false)
     private var lastState: Boolean? = null
-    private var pingThread: Thread? = null
 
     override fun onReceive(context: Context, intent: Intent) {
         if (intent.extras != null) {
@@ -45,12 +49,15 @@ class NetworkChangeReceiver : BroadcastReceiver() {
 
     private fun checkNetworkStateByPing() {
         val handler = Handler()
-        if (pingThread != null) pingThread!!.stop()
-        pingThread = Thread {
-            val isReachable =pingMechanism?.run { pingMechanism?.invoke(pingHost,pingTimeOut) }?: Utils.isConnectedToThisServer(pingHost, pingTimeOut)
+        threadExecutor = threadExecutor?: Executors.newSingleThreadExecutor()
+
+         future= threadExecutor?.submit {
+            val isReachable = pingMechanism?.run { pingMechanism?.invoke(pingHost, pingTimeOut) }
+                    ?: Utils.isConnectedToThisServer(pingHost, pingTimeOut)
+
             handler.post { if (isReachable) informObservers(true) else informObservers(false) }
         }
-        pingThread!!.start()
+
     }
 
     private fun informObservers(currentState: Boolean) {

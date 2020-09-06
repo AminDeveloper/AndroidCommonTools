@@ -27,7 +27,7 @@ class MainActivity : Activity(), TestObserver.ObserverTest {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         NetworkChangeReceiver.PingBeforeInform = true
-        NetworkChangeReceiver.pingMechanism = { host, timeout -> true }
+        NetworkChangeReceiver.pingMechanism = { host, timeout -> Utils.isConnectedToThisServer(host,timeout) }
 
         DefaultNetworkErrorDialog.startShowingDefaultNetworkErrorDialog(this)
         SmartLogger.initLogger(applicationContext)

@@ -16,7 +16,7 @@ class RetryHelperLive(val retryHelper: RetryHelper) : LiveData<String>() {
         super.removeObserver(observer)
         if (!hasObservers()) {
             retryHelper.disable()
-            SmartLogger.logDebug("disabled")
+//            SmartLogger.logDebug("disabled")
         }
     }
     override fun onInactive() {

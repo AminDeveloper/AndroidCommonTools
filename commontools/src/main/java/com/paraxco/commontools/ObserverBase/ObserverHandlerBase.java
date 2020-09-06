@@ -31,7 +31,7 @@ abstract public class ObserverHandlerBase<OBSERVER_TYPE, OBSERVABLE_TYPE> {
             setOwner(owner, observer);
             observerList.put(observer, true);
             callBackObserverListChangeListeners(true, observer);
-            SmartLogger.logDebug("observerList size:" + observerList.size());
+//            SmartLogger.logDebug("observerList size:" + observerList.size());
         }
     }
 
@@ -43,13 +43,13 @@ abstract public class ObserverHandlerBase<OBSERVER_TYPE, OBSERVABLE_TYPE> {
         synchronized (this) {
             observerList.remove(observer);
             callBackObserverListChangeListeners(false, observer);
-            SmartLogger.logDebug("observerList size:" + observerList.size());
+//            SmartLogger.logDebug("observerList size:" + observerList.size());
         }
     }
 
     protected void informObserverListInternal(OBSERVABLE_TYPE data) {
         synchronized (this) {
-            SmartLogger.logDebug("observerList size:" + observerList.size());
+//            SmartLogger.logDebug("observerList size:" + observerList.size());
 
             for (Map.Entry<OBSERVER_TYPE, Boolean> entry : observerList.entrySet()) {
                 informObserverInternal(entry.getKey(), data);
