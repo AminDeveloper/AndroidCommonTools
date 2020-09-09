@@ -15,7 +15,7 @@ group 'com.paraxco'
 group='com.github.AminDeveloper'
 
 
-version '0.5.4'
+version '0.5.5'
 
 android {
     compileSdkVersion 27
@@ -25,7 +25,7 @@ android {
         minSdkVersion 16
         targetSdkVersion 27
         versionCode 32
-        versionName "0.5.4"
+        versionName "0.5.5"
 
         testInstrumentationRunner "android.support.test.runner.AndroidJUnitRunner"
 
@@ -53,7 +53,7 @@ dependencies {
 
 //    compile 'com.android.support:design:26.1.0'
 
-    implementation 'com.androidadvance:topsnackbar:1.1.1'
+//    implementation 'com.androidadvance:topsnackbar:1.1.1'
 
 
 //    compile 'com.onesignal:OneSignal:3.+@aar'
@@ -61,6 +61,7 @@ dependencies {
 //    compile project(':persiandatepicker')
 
     implementation "me.leolin:ShortcutBadger:1.1.19@aar"
+    implementation 'com.android.support:recyclerview-v7:27.1.1'
 
     //Android architecture components
     def lifecycle_version = "1.1.0"

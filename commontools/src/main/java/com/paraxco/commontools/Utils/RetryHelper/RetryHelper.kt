@@ -12,7 +12,6 @@ import android.view.Window
 import android.view.WindowManager
 import com.paraxco.commontools.R
 import com.paraxco.commontools.Utils.RetryHelper.RetryHelperLive
-import com.paraxco.commontools.Utils.SmartLogger
 import com.paraxco.commontools.Utils.Utils
 import java.lang.Exception
 import java.util.concurrent.atomic.AtomicBoolean
@@ -109,7 +108,7 @@ class RetryHelper(val context: Context, var numOfFinished: Int = 1) : NetworkObs
                 return
             }
             if (!dismissed && (dialog == null || !dialog!!.isShowing)) {
-                dialog = Dialog(context, R.style.DialogStyle)
+                dialog = Dialog(context, R.style.NetworkErrorDialogStyle)
                 //        alert.setTitle(title);
                 dialog?.requestWindowFeature(Window.FEATURE_NO_TITLE)
                 dialog?.setContentView(networkErrorDialog)

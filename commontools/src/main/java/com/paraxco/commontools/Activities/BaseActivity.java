@@ -6,16 +6,9 @@ import android.content.Intent;
 import android.content.res.Configuration;
 import android.content.res.Resources;
 import android.support.annotation.NonNull;
-import android.support.design.widget.Snackbar;
-import android.support.v4.content.ContextCompat;
 import android.support.v7.app.AppCompatActivity;
 import android.util.DisplayMetrics;
-import android.view.View;
-import android.widget.TextView;
-
-import com.androidadvance.topsnackbar.TSnackbar;
 import com.paraxco.commontools.Observers.NetworkObserverHandler;
-import com.paraxco.commontools.R;
 import com.paraxco.commontools.Utils.Permision.PermisionUtils;
 import com.paraxco.commontools.Utils.Utils;
 
@@ -151,31 +144,31 @@ public abstract class BaseActivity extends AppCompatActivity implements NetworkO
 
 
     public void showTopMessage(String message) {
-        View coordinatorLayout = null;
-        if (coordinatorLayout == null)
-            coordinatorLayout = getWindow().getDecorView().getRootView();
-
-        TSnackbar snackbar = TSnackbar
-                .make(coordinatorLayout, message, Snackbar.LENGTH_SHORT);
-        View sbView = snackbar.getView();
-        sbView.setAlpha(0.6f);
-        TextView textView = (TextView) sbView.findViewById(android.support.design.R.id.snackbar_text);
-        textView.setTextColor(ContextCompat.getColor(this, R.color.white));
-        sbView.setBackgroundColor(ContextCompat.getColor(this, R.color.gray2));
-        snackbar.show();
+//        View coordinatorLayout = null;
+//        if (coordinatorLayout == null)
+//            coordinatorLayout = getWindow().getDecorView().getRootView();
+//
+//        TSnackbar snackbar = TSnackbar
+//                .make(coordinatorLayout, message, Snackbar.LENGTH_SHORT);
+//        View sbView = snackbar.getView();
+//        sbView.setAlpha(0.6f);
+//        TextView textView = (TextView) sbView.findViewById(android.support.design.R.id.snackbar_text);
+//        textView.setTextColor(ContextCompat.getColor(this, R.color.white));
+//        sbView.setBackgroundColor(ContextCompat.getColor(this, R.color.gray2));
+//        snackbar.show();
     }
 
     private void showBottomMessage(String message) {
-        View coordinatorLayout = null;
-        if (coordinatorLayout == null)
-            coordinatorLayout = getWindow().getDecorView().getRootView();
-        Snackbar snackbar = Snackbar
-                .make(coordinatorLayout, message, Snackbar.LENGTH_SHORT);
-        View sbView = snackbar.getView();
-
-        sbView.setAlpha(0.6f);
-
-        snackbar.show();
+//        View coordinatorLayout = null;
+//        if (coordinatorLayout == null)
+//            coordinatorLayout = getWindow().getDecorView().getRootView();
+//        Snackbar snackbar = Snackbar
+//                .make(coordinatorLayout, message, Snackbar.LENGTH_SHORT);
+//        View sbView = snackbar.getView();
+//
+//        sbView.setAlpha(0.6f);
+//
+//        snackbar.show();
     }
 
     public void showMessage(int res) {

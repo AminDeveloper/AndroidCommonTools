@@ -14,11 +14,11 @@
                 <action android:name="android.net.wifi.WIFI_STATE_CHANGED" />
             </intent-filter>
         </receiver>
-        <receiver android:name=".BroadCastReceiver.SmsReceiver">
-            <intent-filter>
-                <action android:name="android.provider.Telephony.SMS_RECEIVED" />
-            </intent-filter>
-        </receiver>
+<!--        <receiver android:name=".BroadCastReceiver.SmsReceiver">-->
+<!--            <intent-filter>-->
+<!--                <action android:name="android.provider.Telephony.SMS_RECEIVED" />-->
+<!--            </intent-filter>-->
+<!--        </receiver>-->
     </application>
 </manifest>
 

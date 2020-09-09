@@ -347,7 +347,7 @@ public class Utils {
         View layout = mInflater.inflate(R.layout.progress_bar_dialog, null);
         loadingDialog.setContentView(layout);
         ProgressBar progressBar = (ProgressBar) layout.findViewById(R.id.progressBar);
-        Utils.chageProgressbarColor(progressBar, context, R.color.color_blue_dark);
+        Utils.chageProgressbarColor(progressBar, context, R.color.blue);
 
 //            TextView mTextView = (TextView) layout.findViewById(R.id.text);
 //            if (text.equals(""))

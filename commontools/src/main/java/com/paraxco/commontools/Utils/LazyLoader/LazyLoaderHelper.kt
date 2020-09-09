@@ -6,7 +6,6 @@ import android.support.v7.widget.RecyclerView
 import android.view.View
 import com.paraxco.commontools.Observers.NestedScrollObserver
 import com.paraxco.commontools.Observers.RetryHelper
-import com.paraxco.commontools.Utils.SmartLogger
 
 /**
  *
