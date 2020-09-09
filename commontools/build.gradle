@@ -15,7 +15,7 @@ group 'com.paraxco'
 group='com.github.AminDeveloper'
 
 
-version '0.5.5'
+version '0.5.5' 
 
 android {
     compileSdkVersion 27
