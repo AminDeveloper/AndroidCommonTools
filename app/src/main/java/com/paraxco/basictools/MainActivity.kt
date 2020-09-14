@@ -32,7 +32,7 @@ class MainActivity : Activity(), TestObserver.ObserverTest {
         DefaultNetworkErrorDialog.startShowingDefaultNetworkErrorDialog(this)
         SmartLogger.initLogger(applicationContext)
         setContentView(R.layout.main_activity)
-
+        testMethod()
         showNotificationTest.setOnClickListener({
             startNotificationBadgeTest()
         })
@@ -49,6 +49,17 @@ class MainActivity : Activity(), TestObserver.ObserverTest {
                 retry()
             })
         }
+
+    }
+
+    private fun testMethod() {
+
+        testmethod2()
+    }
+
+    private fun testmethod2() {
+        SmartLogger.logDebug("hello ")
+        SmartLogger.logError("Error! ")
 
     }
 
