@@ -23,10 +23,21 @@ class NetworkChangeReceiver : BroadcastReceiver() {
         var PingBeforeInform = false
         var pingHost = "www.google.com"
         var pingTimeOut = 2000
+        private var lastState: Boolean? = null
+
         var pingMechanism: ((host: String, timeout: Int) -> Boolean)? = null
 
         //        private var future: Future<*>? = null
         private var threadExecutor: ExecutorService? = null
+
+        fun checkNetworkState(context: Context) {
+            val currentState = Utils.isNetworkAvailable(context)
+            //to prevent multiple call from device
+            if (lastState == null || lastState != currentState) {
+                lastState = currentState
+                informNetworkChange(currentState)
+            }
+        }
 
         fun informNetworkChange(connectionState: Boolean) {
             if (PingBeforeInform) checkNetworkStateByPing() else informObservers(connectionState)
@@ -52,16 +63,10 @@ class NetworkChangeReceiver : BroadcastReceiver() {
     }
 
     var isRegistered = AtomicBoolean(false)
-    private var lastState: Boolean? = null
 
     override fun onReceive(context: Context, intent: Intent) {
         if (intent.extras != null) {
-            val currentState = Utils.isNetworkAvailable(context)
-            //to prevent multiple call from device
-            if (lastState == null || lastState != currentState) {
-                lastState = currentState
-                informNetworkChange(currentState)
-            }
+            checkNetworkState(context)
         }
     }
 
