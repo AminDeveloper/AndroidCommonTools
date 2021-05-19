@@ -15,7 +15,7 @@ group 'com.paraxco'
 group='com.github.AminDeveloper'
 
 
-version '0.5.9'
+version '0.5.10'
 
 android {
     compileSdkVersion 27
@@ -24,8 +24,8 @@ android {
     defaultConfig {
         minSdkVersion 16
         targetSdkVersion 27
-        versionCode 35
-        versionName "0.5.9"
+        versionCode 36
+        versionName "0.5.10"
 
         testInstrumentationRunner "android.support.test.runner.AndroidJUnitRunner"
 

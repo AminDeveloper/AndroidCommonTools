@@ -37,7 +37,7 @@ public class NetworkStateLiveData extends MutableLiveData<NetworkStateLiveData.N
     public void registerService(Context context) {
         networkChangeReceiver.registerService(context);
         //inform initial value
-       networkChangeReceiver.refreshCurrentState(context);
+        NetworkChangeReceiver.Companion.checkNetworkState(context);
 
     }
 
