@@ -27,7 +27,7 @@ class NetworkChangeReceiver : BroadcastReceiver() {
         var pingMechanism: ((host: String, timeout: Int) -> Boolean)? = null
     }
 
-    private var future: Future<*>?=null
+    private var future: Future<*>? = null
     private var threadExecutor: ExecutorService? = null
     var isRegistered = AtomicBoolean(false)
     private var lastState: Boolean? = null
@@ -44,20 +44,19 @@ class NetworkChangeReceiver : BroadcastReceiver() {
     }
 
     private fun changeState(currentState: Boolean) {
-        if (!currentState || !PingBeforeInform) informObservers(currentState) else checkNetworkStateByPing()
+        if (PingBeforeInform) checkNetworkStateByPing() else informObservers(currentState)
     }
 
     private fun checkNetworkStateByPing() {
         val handler = Handler()
-        threadExecutor = threadExecutor?: Executors.newSingleThreadExecutor()
+        threadExecutor = threadExecutor ?: Executors.newSingleThreadExecutor()
 
-         future= threadExecutor?.submit {
+        future = threadExecutor?.submit {
             val isReachable = pingMechanism?.run { pingMechanism?.invoke(pingHost, pingTimeOut) }
                     ?: Utils.isConnectedToThisServer(pingHost, pingTimeOut)
 
             handler.post { if (isReachable) informObservers(true) else informObservers(false) }
         }
-
     }
 
     private fun informObservers(currentState: Boolean) {
@@ -94,6 +93,4 @@ class NetworkChangeReceiver : BroadcastReceiver() {
         val currentState = Utils.isNetworkAvailable(context)
         changeState(currentState)
     }
-
-
 }
