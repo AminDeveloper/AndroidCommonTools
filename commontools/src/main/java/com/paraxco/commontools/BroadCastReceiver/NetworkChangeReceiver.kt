@@ -13,7 +13,6 @@ import com.paraxco.commontools.Observers.NetworkStateLiveData.NetworkState
 import com.paraxco.commontools.Utils.Utils
 import java.util.concurrent.ExecutorService
 import java.util.concurrent.Executors
-import java.util.concurrent.Future
 import java.util.concurrent.atomic.AtomicBoolean
 
 /**
@@ -23,12 +22,35 @@ class NetworkChangeReceiver : BroadcastReceiver() {
     companion object {
         var PingBeforeInform = false
         var pingHost = "www.google.com"
-        var pingTimeOut = 1000
+        var pingTimeOut = 2000
         var pingMechanism: ((host: String, timeout: Int) -> Boolean)? = null
+
+        //        private var future: Future<*>? = null
+        private var threadExecutor: ExecutorService? = null
+
+        fun informNetworkChange(connectionState: Boolean) {
+            if (PingBeforeInform) checkNetworkStateByPing() else informObservers(connectionState)
+        }
+
+        private fun checkNetworkStateByPing() {
+            val handler = Handler()
+            threadExecutor = threadExecutor ?: Executors.newSingleThreadExecutor()
+
+//            future =
+            threadExecutor?.submit {
+                val isReachable = pingMechanism?.run { pingMechanism?.invoke(pingHost, pingTimeOut) }
+                        ?: Utils.isConnectedToThisServer(pingHost, pingTimeOut)
+
+                handler.post { if (isReachable) informObservers(true) else informObservers(false) }
+            }
+        }
+
+        private fun informObservers(currentState: Boolean) {
+            NetworkObserverHandler.getInstance().informObservers(currentState)
+            NetworkStateLiveData.getInstance().postValue(NetworkState(currentState))
+        }
     }
 
-    private var future: Future<*>? = null
-    private var threadExecutor: ExecutorService? = null
     var isRegistered = AtomicBoolean(false)
     private var lastState: Boolean? = null
 
@@ -38,30 +60,9 @@ class NetworkChangeReceiver : BroadcastReceiver() {
             //to prevent multiple call from device
             if (lastState == null || lastState != currentState) {
                 lastState = currentState
-                changeState(currentState)
+                informNetworkChange(currentState)
             }
         }
-    }
-
-    private fun changeState(currentState: Boolean) {
-        if (PingBeforeInform) checkNetworkStateByPing() else informObservers(currentState)
-    }
-
-    private fun checkNetworkStateByPing() {
-        val handler = Handler()
-        threadExecutor = threadExecutor ?: Executors.newSingleThreadExecutor()
-
-        future = threadExecutor?.submit {
-            val isReachable = pingMechanism?.run { pingMechanism?.invoke(pingHost, pingTimeOut) }
-                    ?: Utils.isConnectedToThisServer(pingHost, pingTimeOut)
-
-            handler.post { if (isReachable) informObservers(true) else informObservers(false) }
-        }
-    }
-
-    private fun informObservers(currentState: Boolean) {
-        NetworkObserverHandler.getInstance().informObservers(currentState)
-        NetworkStateLiveData.getInstance().postValue(NetworkState(currentState))
     }
 
     fun registerService(context: Context) {
@@ -91,6 +92,6 @@ class NetworkChangeReceiver : BroadcastReceiver() {
 
     fun refreshCurrentState(context: Context?) {
         val currentState = Utils.isNetworkAvailable(context)
-        changeState(currentState)
+        informNetworkChange(currentState)
     }
 }
