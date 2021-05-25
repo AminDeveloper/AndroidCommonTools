@@ -10,10 +10,10 @@ import android.support.v7.app.AppCompatActivity
 import android.view.View
 import android.view.Window
 import android.view.WindowManager
+import com.paraxco.commontools.BroadCastReceiver.NetworkChangeReceiver.Companion.refreshCurrentState
 import com.paraxco.commontools.R
 import com.paraxco.commontools.Utils.RetryHelper.RetryHelperLive
 import com.paraxco.commontools.Utils.Utils
-import java.lang.Exception
 import java.util.concurrent.atomic.AtomicBoolean
 
 /**
@@ -56,6 +56,7 @@ class RetryHelper(val context: Context, var numOfFinished: Int = 1) : NetworkObs
         private var paused = false
 
         private var retriedDuringPause = false //retry has been called after pause
+
         /**
          * dismiss dialog and no longer show until endNoDialogSection() is called
          */
@@ -84,7 +85,6 @@ class RetryHelper(val context: Context, var numOfFinished: Int = 1) : NetworkObs
                 showDialog(context)
                 wasShowing = false
             }
-
         }
 
         fun dismisDialog() {
@@ -96,10 +96,10 @@ class RetryHelper(val context: Context, var numOfFinished: Int = 1) : NetworkObs
                     e.printStackTrace()
                 }
         }
-        fun unLockDismissedDialog() {
-            dismissed=false
-        }
 
+        fun unLockDismissedDialog() {
+            dismissed = false
+        }
 
         fun showDialog(context: Context) {
             if (inNoDialogSection) {
@@ -130,13 +130,11 @@ class RetryHelper(val context: Context, var numOfFinished: Int = 1) : NetworkObs
 //            dialog?.setCancelable(false)
                 try {
                     dialog?.show()
-
                 } catch (exception: Exception) {
                     exception.printStackTrace()
                 }
             }
         }
-
     }
 
     var enabled = true
@@ -196,8 +194,8 @@ class RetryHelper(val context: Context, var numOfFinished: Int = 1) : NetworkObs
         }
         if (calling.getAndSet(true))
             return
-        showDialog(context)
-
+        refreshCurrentState(context)
+//        showDialog(context)
 
 //        SmartLogger.logDebug("retry")
         if (Utils.isNetworkAvailable(context)) {
@@ -228,7 +226,6 @@ class RetryHelper(val context: Context, var numOfFinished: Int = 1) : NetworkObs
         }
     }
 
-
     override fun getContextForNetworkObserver(): Context {
         return context
     }
@@ -247,5 +244,4 @@ class RetryHelper(val context: Context, var numOfFinished: Int = 1) : NetworkObs
         enabled = false
         NetworkObserverHandler.getInstance().removeObserver(this)
     }
-
 }

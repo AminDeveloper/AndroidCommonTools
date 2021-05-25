@@ -39,6 +39,11 @@ class NetworkChangeReceiver : BroadcastReceiver() {
             }
         }
 
+        fun refreshCurrentState(context: Context?) {
+            val currentState = Utils.isNetworkAvailable(context)
+            informNetworkChange(currentState)
+        }
+
         fun informNetworkChange(connectionState: Boolean) {
             if (PingBeforeInform) checkNetworkStateByPing() else informObservers(connectionState)
         }
@@ -52,7 +57,7 @@ class NetworkChangeReceiver : BroadcastReceiver() {
                 val isReachable = pingMechanism?.run { pingMechanism?.invoke(pingHost, pingTimeOut) }
                         ?: Utils.isConnectedToThisServer(pingHost, pingTimeOut)
 
-                handler.post { if (isReachable) informObservers(true) else informObservers(false) }
+                handler.post { informObservers(isReachable) }
             }
         }
 
@@ -93,10 +98,5 @@ class NetworkChangeReceiver : BroadcastReceiver() {
                 e.printStackTrace()
             }
         }
-    }
-
-    fun refreshCurrentState(context: Context?) {
-        val currentState = Utils.isNetworkAvailable(context)
-        informNetworkChange(currentState)
     }
 }
