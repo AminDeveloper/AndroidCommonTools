@@ -10,6 +10,7 @@ import android.os.Handler
 import com.paraxco.commontools.Observers.NetworkObserverHandler
 import com.paraxco.commontools.Observers.NetworkStateLiveData
 import com.paraxco.commontools.Observers.NetworkStateLiveData.NetworkState
+import com.paraxco.commontools.Observers.RetryHelper
 import com.paraxco.commontools.Utils.Utils
 import java.util.concurrent.ExecutorService
 import java.util.concurrent.Executors
@@ -34,6 +35,10 @@ class NetworkChangeReceiver : BroadcastReceiver() {
             val currentState = Utils.isNetworkAvailable(context)
             //to prevent multiple call from device
             if (lastState == null || lastState != currentState) {
+
+                if(lastState == false && currentState)// unlock showing network error if network become available
+                    RetryHelper.unLockDismissedDialog()
+
                 lastState = currentState
                 informNetworkChange(currentState)
             }

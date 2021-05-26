@@ -35,7 +35,6 @@ object DefaultNetworkErrorDialog {
 
     private fun handleNetworkEvent(networkState: NetworkStateLiveData.NetworkState?, context: Context?) {
         networkState?.let {
-            RetryHelper.unLockDismissedDialog()
             if (it.isConnected)
                 RetryHelper.dismisDialog()
             else
