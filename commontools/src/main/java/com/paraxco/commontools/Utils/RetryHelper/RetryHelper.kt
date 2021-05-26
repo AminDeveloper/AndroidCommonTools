@@ -52,10 +52,9 @@ class RetryHelper(val context: Context, var numOfFinished: Int = 1) : NetworkObs
         private var wasShowing = false//dialog was showing before dialog section start or during dialog section
         private var inNoDialogSection = false
 
-        //Pause
-        private var paused = false
+        //Pause All retry
+        private var allRetryPaused = false
 
-        private var retriedDuringPause = false //retry has been called after pause
 
         /**
          * dismiss dialog and no longer show until endNoDialogSection() is called
@@ -85,6 +84,15 @@ class RetryHelper(val context: Context, var numOfFinished: Int = 1) : NetworkObs
                 showDialog(context)
                 wasShowing = false
             }
+        }
+        fun pauseAllRetry() {
+            allRetryPaused = true
+        }
+
+        fun resumeAllRetry() {
+            allRetryPaused = false
+//            if (retriedDuringPause)
+//                retry()
         }
 
         fun dismisDialog() {
@@ -141,6 +149,10 @@ class RetryHelper(val context: Context, var numOfFinished: Int = 1) : NetworkObs
     var delaySecond: Long = 8
     var call: (() -> Any?)? = null
     private var liveData: RetryHelperLive? = null
+    private var thisRetryPaused = false
+    private var retriedDuringPause = false //retry has been called after pause
+
+
 
     /**
      * if owner is passed no need to explicit call for lifecycle like pause resume and disable
@@ -167,12 +179,12 @@ class RetryHelper(val context: Context, var numOfFinished: Int = 1) : NetworkObs
         retry(true)
     }
 
-    fun pauseRetry() {
-        paused = true
+    fun pauseThisRetry() {
+        thisRetryPaused = true
     }
 
-    fun resumeRetry() {
-        paused = false
+    fun resumeThisRetry() {
+        thisRetryPaused = false
         if (retriedDuringPause)
             retry()
     }
@@ -183,7 +195,7 @@ class RetryHelper(val context: Context, var numOfFinished: Int = 1) : NetworkObs
      * call it when something has gone wrong and retry needed
      */
     fun retry(whithDelay: Boolean) {
-        if (paused) {
+        if (allRetryPaused || thisRetryPaused) {
             retriedDuringPause = true
             return
         }

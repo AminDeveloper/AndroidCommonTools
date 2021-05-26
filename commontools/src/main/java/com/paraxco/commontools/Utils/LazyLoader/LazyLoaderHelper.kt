@@ -188,11 +188,11 @@ class LazyLoaderHelper {
     }
 
     fun pauseRetry() {
-        retryHelper?.pauseRetry()
+        retryHelper?.pauseThisRetry()
     }
 
     fun resumeRetry() {
-        retryHelper?.resumeRetry()
+        retryHelper?.resumeThisRetry()
     }
 
 
