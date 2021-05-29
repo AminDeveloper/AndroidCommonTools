@@ -1,5 +1,6 @@
 buildscript {
     repositories {
+        google()
         mavenCentral()
     }
 
@@ -15,7 +16,7 @@ group 'com.paraxco'
 group='com.github.AminDeveloper'
 
 
-version '0.5.13'
+version '0.5.14'
 
 android {
     compileSdkVersion 27
@@ -24,8 +25,8 @@ android {
     defaultConfig {
         minSdkVersion 16
         targetSdkVersion 27
-        versionCode 39
-        versionName "0.5.13"
+        versionCode 40
+        versionName "0.5.14"
 
         testInstrumentationRunner "android.support.test.runner.AndroidJUnitRunner"
 
@@ -70,5 +71,6 @@ dependencies {
 
 }
 repositories {
+    google()
     mavenCentral()
 }
