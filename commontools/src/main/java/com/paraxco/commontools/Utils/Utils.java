@@ -5,8 +5,6 @@ import android.annotation.SuppressLint;
 import android.app.Activity;
 import android.app.AlarmManager;
 import android.app.Dialog;
-import android.app.Notification;
-import android.app.NotificationManager;
 import android.app.PendingIntent;
 import android.content.Context;
 import android.content.ContextWrapper;
@@ -35,8 +33,6 @@ import android.support.annotation.RequiresApi;
 import android.support.v4.app.ActivityCompat;
 import android.support.v4.content.ContextCompat;
 import android.support.v4.graphics.drawable.DrawableCompat;
-import android.support.v4.graphics.drawable.RoundedBitmapDrawable;
-import android.support.v4.graphics.drawable.RoundedBitmapDrawableFactory;
 import android.util.DisplayMetrics;
 import android.util.Log;
 import android.util.TypedValue;
@@ -52,9 +48,9 @@ import com.paraxco.commontools.Utils.Permision.PermisionUtils;
 
 import java.io.File;
 import java.io.IOException;
-import java.net.InetAddress;
+import java.net.InetSocketAddress;
+import java.net.Socket;
 import java.util.Locale;
-
 
 
 /**
@@ -64,6 +60,7 @@ import java.util.Locale;
 public class Utils {
 
     public static final String NOTIFICATION_COMMON_DATA = "notification_common_data";
+
     public static ContextWrapper wrap(Context context, String language) {
         Configuration config = context.getResources().getConfiguration();
         Locale sysLocale = null;
@@ -232,13 +229,14 @@ public class Utils {
         return activeNetworkInfo != null && activeNetworkInfo.isConnected();
     }
 
-    public static boolean isConnectedToThisServer(String host,int timeout) {
+    public static boolean isConnectedToThisServer(String host, int timeout) {
+        return checkIsReachable(host, timeout);
 
-        try {
-            return InetAddress.getByName(host).isReachable(timeout);
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
+//        try {
+//            return InetAddress.getByName(host).isReachable(timeout);
+//        } catch (IOException e) {
+//            e.printStackTrace();
+//        }
 
 
 //        Runtime runtime = Runtime.getRuntime();
@@ -252,7 +250,40 @@ public class Utils {
 //        } catch (InterruptedException e) {
 //            e.printStackTrace();
 //        }
-        return false;
+//        return false;
+    }
+
+    public static boolean checkIsReachable(String url, int timeOut) {
+//    SmartLogger.logDebug("ping call ")
+
+        if (url == "#" || url == "")
+            return false;
+//    SmartLogger.logDebug("url = $url")
+
+        String urlToCheck = url.replace("https://", "");
+        urlToCheck = urlToCheck.replace("http://", "");
+//    SmartLogger.logDebug("urlToCheck = $urlToCheck")
+        boolean isReachable =
+                isReachable(urlToCheck, timeOut);
+//    SmartLogger.logDebug("isReachable = $isReachable")
+        return isReachable;
+    }
+
+    public static boolean isReachable(String addr, int timeOutMillis) {
+        // Any Open port on other machine
+        // openPort =  22 - ssh, 80 or 443 - webserver, 25 - mailserver etc.
+        int openPort = 80;
+        try {
+            Socket socket = new Socket();
+
+            socket.connect(
+                    new InetSocketAddress(addr, openPort),
+                    timeOutMillis
+            );
+            return true;
+        } catch (IOException ex) {
+            return false;
+        }
     }
 
 

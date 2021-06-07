@@ -243,7 +243,7 @@ class RetryHelper(val context: Context, var numOfFinished: Int = 1) : NetworkObs
     }
 
     override fun onNetworkStateChange(connected: Boolean) {
-        unLockDismissedDialog();
+        unLockDismissedDialog()
         if (connected)
             retry(false)
     }

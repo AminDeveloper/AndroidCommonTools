@@ -36,11 +36,9 @@ class NetworkChangeReceiver : BroadcastReceiver() {
             //to prevent multiple call from device
             if (lastState == null || lastState != currentState) {
 
-                if(lastState == false && currentState)// unlock showing network error if network become available
-                    RetryHelper.unLockDismissedDialog()
-
                 lastState = currentState
                 informNetworkChange(currentState)
+
             }
         }
 
@@ -69,6 +67,9 @@ class NetworkChangeReceiver : BroadcastReceiver() {
         private fun informObservers(currentState: Boolean) {
             NetworkObserverHandler.getInstance().informObservers(currentState)
             NetworkStateLiveData.getInstance().postValue(NetworkState(currentState))
+
+            if(currentState)// unlock showing network error if network become available
+                RetryHelper.unLockDismissedDialog()
         }
     }
 
