@@ -1,14 +1,15 @@
-package com.paraxco.commontools.Utils.Permision.Activity;
+package com.paraxco.commontools.utils.Permision.Activity;
 
 import android.app.Activity;
 import android.content.Intent;
 import android.os.Bundle;
-import android.support.annotation.NonNull;
-import android.support.annotation.Nullable;
-import android.support.v4.app.ActivityCompat;
+
+import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
+import androidx.core.app.ActivityCompat;
 
 import com.paraxco.commontools.R;
-import com.paraxco.commontools.Utils.Permision.PermisionUtils;
+import com.paraxco.commontools.utils.Permision.PermisionUtils;
 
 
 /**

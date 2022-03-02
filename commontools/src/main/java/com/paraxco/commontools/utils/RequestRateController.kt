@@ -1,7 +1,6 @@
-package com.paraxco.commontools.Observers;
+package com.paraxco.commontools.utils
 
-import org.jetbrains.anko.doAsync
-import org.jetbrains.anko.uiThread
+
 
 /**
  * controls frequency of doing an action by given delay

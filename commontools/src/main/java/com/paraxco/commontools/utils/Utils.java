@@ -1,4 +1,4 @@
-package com.paraxco.commontools.Utils;
+package com.paraxco.commontools.utils;
 
 import android.Manifest;
 import android.annotation.SuppressLint;
@@ -29,10 +29,7 @@ import android.net.NetworkInfo;
 import android.net.Uri;
 import android.os.Build;
 import android.provider.MediaStore;
-import android.support.annotation.RequiresApi;
-import android.support.v4.app.ActivityCompat;
-import android.support.v4.content.ContextCompat;
-import android.support.v4.graphics.drawable.DrawableCompat;
+
 import android.util.DisplayMetrics;
 import android.util.Log;
 import android.util.TypedValue;
@@ -42,9 +39,14 @@ import android.view.View;
 import android.view.Window;
 import android.widget.ProgressBar;
 
+import androidx.annotation.RequiresApi;
+import androidx.core.app.ActivityCompat;
+import androidx.core.content.ContextCompat;
+import androidx.core.graphics.drawable.DrawableCompat;
+
 import com.paraxco.commontools.Activities.BaseActivity;
 import com.paraxco.commontools.R;
-import com.paraxco.commontools.Utils.Permision.PermisionUtils;
+import com.paraxco.commontools.utils.Permision.PermisionUtils;
 
 import java.io.File;
 import java.io.IOException;

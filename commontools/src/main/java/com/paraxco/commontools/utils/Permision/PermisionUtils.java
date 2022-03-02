@@ -1,13 +1,14 @@
-package com.paraxco.commontools.Utils.Permision;
+package com.paraxco.commontools.utils.Permision;
 
 import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
 import android.content.pm.PackageManager;
-import android.support.v4.app.ActivityCompat;
 
 
-import com.paraxco.commontools.Utils.Permision.Activity.PermisionActivity;
+import androidx.core.app.ActivityCompat;
+
+import com.paraxco.commontools.utils.Permision.Activity.PermisionActivity;
 
 import java.util.HashMap;
 import java.util.Map;

@@ -1,8 +1,8 @@
-package com.paraxco.commontools.Utils.RetryHelper
+package com.paraxco.commontools.utils.RetryHelper
 
-import android.arch.lifecycle.LifecycleOwner
-import android.arch.lifecycle.Observer
 import android.content.Context
+import androidx.lifecycle.LifecycleOwner
+import androidx.lifecycle.Observer
 import com.paraxco.commontools.Observers.NetworkStateLiveData
 import com.paraxco.commontools.Observers.RetryHelper
 

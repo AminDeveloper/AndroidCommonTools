@@ -1,6 +1,6 @@
 package com.paraxco.commontools.Observers
 
-import android.support.v4.widget.NestedScrollView
+import androidx.core.widget.NestedScrollView
 
 class NestedScrollObserver : CommandObserver<NestedScrollView.OnScrollChangeListener>() {
     companion object {

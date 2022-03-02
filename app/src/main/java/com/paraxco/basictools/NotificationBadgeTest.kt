@@ -2,11 +2,10 @@ package com.paraxco.basictools
 
 import android.content.Intent
 import android.os.Bundle
-import com.paraxco.basictools.R
 import com.paraxco.commontools.Activities.BaseActivity
-import com.paraxco.commontools.Utils.NotificationHelper
-import com.paraxco.commontools.Utils.SmartLogger
-import com.paraxco.commontools.Utils.Utils
+import com.paraxco.commontools.utils.NotificationHelper
+import com.paraxco.commontools.utils.SmartLogger
+import com.paraxco.commontools.utils.Utils
 import kotlinx.android.synthetic.main.notification_badge_test.*
 
 /**

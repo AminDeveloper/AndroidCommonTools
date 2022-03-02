@@ -1,10 +1,12 @@
 package com.paraxco.commontools.Observers;
 
-import android.arch.lifecycle.LifecycleOwner;
-import android.arch.lifecycle.MutableLiveData;
-import android.arch.lifecycle.Observer;
+
 import android.content.Context;
-import android.support.annotation.NonNull;
+
+import androidx.annotation.NonNull;
+import androidx.lifecycle.LifecycleOwner;
+import androidx.lifecycle.MutableLiveData;
+import androidx.lifecycle.Observer;
 
 import com.paraxco.commontools.BroadCastReceiver.NetworkChangeReceiver;
 
@@ -24,13 +26,14 @@ public class NetworkStateLiveData extends MutableLiveData<NetworkStateLiveData.N
         super();
     }
 
+
     @Override
-    public void observe(@NonNull LifecycleOwner owner, @NonNull Observer<NetworkState> observer) {
+    public void observe(@NonNull LifecycleOwner owner, @NonNull Observer<? super NetworkState> observer) {
         super.observe(owner, observer);
     }
 
     @Override
-    public void observeForever(@NonNull Observer<NetworkState> observer) {
+    public void observeForever(@NonNull Observer<? super NetworkState> observer) {
         super.observeForever(observer);
     }
 

@@ -3,7 +3,7 @@ package com.paraxco.commontools.Observers;
 import android.content.Context;
 import com.paraxco.commontools.BroadCastReceiver.NetworkChangeReceiver;
 import com.paraxco.commontools.ObserverBase.StatefullObserverHandler;
-import com.paraxco.commontools.Utils.Utils;
+import com.paraxco.commontools.utils.Utils;
 
 
 /**

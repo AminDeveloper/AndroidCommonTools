@@ -1,14 +1,15 @@
-package com.paraxco.commontools.Utils;
+package com.paraxco.commontools.utils;
 
 import android.app.PendingIntent;
 import android.app.Service;
 import android.content.Intent;
 import android.os.IBinder;
-import android.support.annotation.Nullable;
 
-import static com.paraxco.commontools.Utils.NotificationHelper.PENDING_INTENT;
-import static com.paraxco.commontools.Utils.NotificationHelper.decreaseAndGetCount;
-import static com.paraxco.commontools.Utils.NotificationHelper.showBadge;
+import static com.paraxco.commontools.utils.NotificationHelper.PENDING_INTENT;
+import static com.paraxco.commontools.utils.NotificationHelper.decreaseAndGetCount;
+import static com.paraxco.commontools.utils.NotificationHelper.showBadge;
+
+import androidx.annotation.Nullable;
 
 /**
  * Created by Amin on 18/11/2017.

@@ -1,11 +1,9 @@
 package com.paraxco.commontools.ObserverBase;
 
 
-import android.arch.lifecycle.GenericLifecycleObserver;
-import android.arch.lifecycle.Lifecycle;
-import android.arch.lifecycle.LifecycleOwner;
-
-import com.paraxco.commontools.Utils.SmartLogger;
+import androidx.lifecycle.GenericLifecycleObserver;
+import androidx.lifecycle.Lifecycle;
+import androidx.lifecycle.LifecycleOwner;
 
 import java.util.LinkedList;
 import java.util.Map;

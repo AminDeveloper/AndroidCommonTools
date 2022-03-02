@@ -1,4 +1,4 @@
-package com.paraxco.commontools.Utils;
+package com.paraxco.commontools.utils;
 
 import android.app.Notification;
 import android.app.NotificationChannel;

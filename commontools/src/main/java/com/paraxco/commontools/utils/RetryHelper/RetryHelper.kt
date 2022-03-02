@@ -1,19 +1,19 @@
 package com.paraxco.commontools.Observers;
 
 import android.app.Dialog
-import android.arch.lifecycle.LifecycleOwner
-import android.arch.lifecycle.Observer
 import android.content.Context
 import android.os.Handler
-import android.support.v4.app.Fragment
-import android.support.v7.app.AppCompatActivity
 import android.view.View
 import android.view.Window
 import android.view.WindowManager
+import androidx.appcompat.app.AppCompatActivity
+import androidx.fragment.app.Fragment
+import androidx.lifecycle.LifecycleOwner
+import androidx.lifecycle.Observer
 import com.paraxco.commontools.BroadCastReceiver.NetworkChangeReceiver.Companion.refreshCurrentState
 import com.paraxco.commontools.R
-import com.paraxco.commontools.Utils.RetryHelper.RetryHelperLive
-import com.paraxco.commontools.Utils.Utils
+import com.paraxco.commontools.utils.RetryHelper.RetryHelperLive
+import com.paraxco.commontools.utils.Utils
 import java.util.concurrent.atomic.AtomicBoolean
 
 /**
@@ -35,7 +35,7 @@ class RetryHelper(val context: Context, var numOfFinished: Int = 1) : NetworkObs
         }
 
         fun getInstanceAndCall(fragment: Fragment, call: () -> Any?, numOfFinished: Int = 1): RetryHelper {
-            return getInstanceAndCall(fragment.context!!, fragment as LifecycleOwner, call, numOfFinished)
+            return getInstanceAndCall(fragment.requireContext(), fragment as LifecycleOwner, call, numOfFinished)
         }
 
         fun getInstanceAndCall(context: Context, owner: LifecycleOwner?, call: () -> Any?, numOfFinished: Int = 1): RetryHelper {

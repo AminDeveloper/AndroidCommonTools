@@ -11,7 +11,7 @@ import com.paraxco.commontools.Observers.NetworkObserverHandler
 import com.paraxco.commontools.Observers.NetworkStateLiveData
 import com.paraxco.commontools.Observers.NetworkStateLiveData.NetworkState
 import com.paraxco.commontools.Observers.RetryHelper
-import com.paraxco.commontools.Utils.Utils
+import com.paraxco.commontools.utils.Utils
 import java.util.concurrent.ExecutorService
 import java.util.concurrent.Executors
 import java.util.concurrent.atomic.AtomicBoolean

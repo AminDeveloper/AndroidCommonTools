@@ -6,16 +6,14 @@ import android.os.Bundle
 import android.widget.Toast
 import com.paraxco.basictools.Commontools.Observers.ObserverList
 import com.paraxco.basictools.Commontools.Observers.TestObserver
-import com.paraxco.commontools.Activities.BaseActivity
 import com.paraxco.commontools.BroadCastReceiver.NetworkChangeReceiver
 import com.paraxco.commontools.Observers.RetryHelper
-import com.paraxco.commontools.Utils.RetryHelper.DefaultNetworkErrorDialog
-import com.paraxco.commontools.Utils.SmartLogger
-import com.paraxco.commontools.Utils.Utils
+import com.paraxco.commontools.utils.RetryHelper.DefaultNetworkErrorDialog
+import com.paraxco.commontools.utils.SmartLogger
+import com.paraxco.commontools.utils.Utils
+import com.paraxco.commontools.utils.doAsync
+import com.paraxco.commontools.utils.uiThread
 import kotlinx.android.synthetic.main.main_activity.*
-import org.jetbrains.anko.doAsync
-import org.jetbrains.anko.uiThread
-
 
 /**
  *

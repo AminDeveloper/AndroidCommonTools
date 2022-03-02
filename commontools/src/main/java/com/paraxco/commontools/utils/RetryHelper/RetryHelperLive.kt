@@ -1,7 +1,7 @@
-package com.paraxco.commontools.Utils.RetryHelper
+package com.paraxco.commontools.utils.RetryHelper
 
-import android.arch.lifecycle.LiveData
-import android.arch.lifecycle.Observer
+import androidx.lifecycle.LiveData
+import androidx.lifecycle.Observer
 import com.paraxco.commontools.Observers.RetryHelper
 
 class RetryHelperLive(val retryHelper: RetryHelper) : LiveData<String>() {
@@ -11,13 +11,14 @@ class RetryHelperLive(val retryHelper: RetryHelper) : LiveData<String>() {
 
     }
 
-    override fun removeObserver(observer: Observer<String>) {
+    override fun removeObserver(observer: Observer<in String>) {
         super.removeObserver(observer)
         if (!hasObservers()) {
             retryHelper.disable()
 //            SmartLogger.logDebug("disabled")
         }
     }
+
     override fun onInactive() {
         super.onInactive()
         if(!hasActiveObservers())

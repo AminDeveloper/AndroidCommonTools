@@ -1,4 +1,4 @@
-package com.paraxco.commontools.Utils;
+package com.paraxco.commontools.utils;
 
 /**
  * Created by Amin on 10/7/2017.

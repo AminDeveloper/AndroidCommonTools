@@ -1,9 +1,9 @@
-package com.paraxco.commontools.Utils.LazyLoader
+package com.paraxco.commontools.utils.LazyLoader
 
-import android.arch.lifecycle.LifecycleOwner
-import android.support.v4.widget.NestedScrollView
-import android.support.v7.widget.RecyclerView
 import android.view.View
+import androidx.core.widget.NestedScrollView
+import androidx.lifecycle.LifecycleOwner
+import androidx.recyclerview.widget.RecyclerView
 import com.paraxco.commontools.Observers.NestedScrollObserver
 import com.paraxco.commontools.Observers.RetryHelper
 
@@ -47,11 +47,11 @@ class LazyLoaderHelper {
         }
     }
     val recyclerListener = object : RecyclerView.OnScrollListener() {
-        override fun onScrollStateChanged(recyclerView: RecyclerView?, newState: Int) {
+        override fun onScrollStateChanged(recyclerView: RecyclerView, newState: Int) {
             super.onScrollStateChanged(recyclerView, newState)
         }
 
-        override fun onScrolled(recyclerView: RecyclerView?, dx: Int, dy: Int) {
+        override fun onScrolled(recyclerView: RecyclerView, dx: Int, dy: Int) {
             super.onScrolled(recyclerView, dx, dy)
             if (finished)
                 return

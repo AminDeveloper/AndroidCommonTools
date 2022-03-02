@@ -1,4 +1,4 @@
-package com.paraxco.commontools.Utils;
+package com.paraxco.commontools.utils;
 
 import android.content.Context;
 import android.content.pm.PackageInfo;

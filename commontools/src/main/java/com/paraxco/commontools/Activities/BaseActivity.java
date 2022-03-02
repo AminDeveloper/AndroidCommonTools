@@ -5,12 +5,14 @@ import android.content.Context;
 import android.content.Intent;
 import android.content.res.Configuration;
 import android.content.res.Resources;
-import android.support.annotation.NonNull;
-import android.support.v7.app.AppCompatActivity;
 import android.util.DisplayMetrics;
+
+import androidx.annotation.NonNull;
+import androidx.appcompat.app.AppCompatActivity;
+
 import com.paraxco.commontools.Observers.NetworkObserverHandler;
-import com.paraxco.commontools.Utils.Permision.PermisionUtils;
-import com.paraxco.commontools.Utils.Utils;
+import com.paraxco.commontools.utils.Permision.PermisionUtils;
+import com.paraxco.commontools.utils.Utils;
 
 import java.util.Locale;
 

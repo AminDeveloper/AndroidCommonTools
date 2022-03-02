@@ -6,7 +6,7 @@
 
     <service
         android:exported="true"
-        android:name=".Utils.NotificationService"
+        android:name=".utils.NotificationService"
         >
     </service>
         <receiver
